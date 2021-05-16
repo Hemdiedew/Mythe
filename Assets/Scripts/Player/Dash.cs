@@ -7,10 +7,10 @@ public class Dash : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float maxTimeBetweenClicks = .5f;
-    [SerializeField] private float dashSpeed = 5;
-    [SerializeField] private float dashSlowModifier;
+    [SerializeField] private float dashSpeed = 20;
+    [SerializeField] private float dashSlowModifier = 20;
     [SerializeField] private bool isDashing = false;
-    [SerializeField] private KeyCode keycode;
+    [SerializeField] private KeyCode keycode = KeyCode.LeftControl;
     [Header("Connections")]
     [SerializeField] private CharacterController controller;
     

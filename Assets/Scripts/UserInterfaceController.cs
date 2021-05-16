@@ -20,4 +20,27 @@ public class UserInterfaceController : MonoBehaviour
         print("Quiting game..");
         Application.Quit();
     }
+    
+    //function for buttons
+
+    public void StartBtn()
+    {
+        
+    }
+    
+    public void SettingBtn()
+    {
+        
+    }
+    
+    public void QuitBtn()
+    {
+        print("Quiting game..");
+        Application.Quit();
+    }
+
+    public void SaveBtn()
+    {
+        
+    }
 }

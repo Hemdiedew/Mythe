@@ -43,6 +43,8 @@ public class PlayerSwitcher : MonoBehaviour
         players[newPlayer].gameObject.transform.position = players[_currentPlayer].transform.position;
         cinemachineCamera.Follow = players[newPlayer].transform;
         cinemachineCamera.LookAt = players[newPlayer].transform;
+        //fixing player rotation
+        players[newPlayer].gameObject.transform.rotation = players[_currentPlayer].gameObject.transform.rotation;
         
         //disable old player enable new player
         players[_currentPlayer].gameObject.SetActive(false);
