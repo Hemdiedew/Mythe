@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         } 
         else
         {
-            moveDirection = new Vector3((_moveHor / 2) * (_isSprinting ? sprintAmplifier : 1), moveDirection.y, _moveVer * (_isSprinting ? sprintAmplifier : 1));
+            moveDirection = new Vector3((_moveHor / 2) * (_canSprint ? (_isSprinting ? sprintAmplifier : 1) : 1), moveDirection.y, _moveVer * (_canSprint ? (_isSprinting ? sprintAmplifier : 1) : 1));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection.x *= speed;
             moveDirection.z *= speed;
