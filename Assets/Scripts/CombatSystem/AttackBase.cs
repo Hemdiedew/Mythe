@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public abstract class AttackBase : MonoBehaviour
 {
-    [SerializeField] protected RangeChecker _rangeChecker;
     protected Enemy _target;
     protected Enemy[] _targets;
     
@@ -16,9 +16,16 @@ public abstract class AttackBase : MonoBehaviour
     public bool used;
     
     public abstract void Use();
+
+    protected virtual void OverrideUpdate()
+    {
+        
+    }
     
     private void Update()
     {
+        OverrideUpdate();
+        
         if (!used) return;
         
         _cooldownTime += Time.deltaTime;

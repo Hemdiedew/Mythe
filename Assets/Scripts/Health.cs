@@ -4,24 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[Serializable] public class MyUnityFloatEvent : UnityEvent <float> {}
+
 public class Health : MonoBehaviour
 {
     public float health;
     public float maxHealth;
     public float startHealth;
 
-    public UnityEvent removeHealthEvent;
+    public MyUnityFloatEvent removeHealthEvent;
+    public MyUnityFloatEvent addHealthEvent;
+
     public UnityEvent dieEvent;
-    public UnityEvent addHealthEvent;
     private void Start()
     {
         health = startHealth;
         if (maxHealth < startHealth) maxHealth = startHealth;
+
+        if (removeHealthEvent == null) removeHealthEvent = new MyUnityFloatEvent();
+        if (addHealthEvent == null) addHealthEvent = new MyUnityFloatEvent();
     }
 
     public void RemoveHealth(float value)
     {
-        removeHealthEvent.Invoke();
+        removeHealthEvent?.Invoke(value);
         
         float newHealth = health - value;
         if (newHealth <= 0) newHealth = 0;
@@ -32,7 +38,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float value)
     {
-        addHealthEvent.Invoke();
+        addHealthEvent.Invoke(value);
         
         float newHealth = health + value;
         if (newHealth >= maxHealth) newHealth = maxHealth;
