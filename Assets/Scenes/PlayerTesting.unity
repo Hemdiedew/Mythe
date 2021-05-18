@@ -1004,7 +1004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888471828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.80999994, z: -8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1328099352}
@@ -1292,7 +1292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328099351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.19, z: 13.77}
+  m_LocalPosition: {x: 0, y: 0, z: 7.07}
   m_LocalScale: {x: 1, y: 3.5329, z: 1}
   m_Children: []
   m_Father: {fileID: 888471829}
@@ -1665,14 +1665,16 @@ MonoBehaviour:
   attackSpeed: 5
   attackCooldown: 0
   used: 0
-  throwObject: {fileID: 0}
+  throwObject: {fileID: 3384110483602561786, guid: 3a881bcceb563de47a2680d29ce4c9b5,
+    type: 3}
+  throwFromLocation: {fileID: 0}
   target: {fileID: 0}
   speed: 0
   maxDistance: 20
   radius: 1.5
   layer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &1741821139
 MonoBehaviour:
   m_ObjectHideFlags: 0
