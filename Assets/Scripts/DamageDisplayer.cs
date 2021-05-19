@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class DamageDisplayer : MonoBehaviour
 {
     private Health _health;
@@ -10,8 +11,8 @@ public class DamageDisplayer : MonoBehaviour
         //if there is a health script on this gameobject we acces it.
         _health = gameObject.GetComponent<Health>();
         print(_health);
-        if(_health != null) _health.removeHealthEvent?.AddListener(TakeDamage);
-        if(_health != null) _health.dieEvent?.AddListener(Die);
+        _health.RemoveHealthEvent?.AddListener(TakeDamage);
+        _health.dieEvent?.AddListener(Die);
     }
 
     private void Die()

@@ -32,7 +32,8 @@ namespace TweenMachine
             }
         }
         #endregion
-        
+
+        public bool debugging = false;
         public List<TweenBuild> _acitveTweens = new List<TweenBuild>();
         private List<TweenBuild> _doneTweens = new List<TweenBuild>();
         private bool paused = false;
@@ -49,6 +50,13 @@ namespace TweenMachine
         {
             for (int i = 0; i < _acitveTweens.Count; i++)
             {
+                if (_acitveTweens[i].GameObject == null)
+                {
+                    if(debugging) Debug.Log("Removed a tween because the object we tween is removed.");
+                    _acitveTweens.RemoveAt(i);
+                    i--;
+                    continue;
+                }
                 _acitveTweens[i].UpdateTween(Time.deltaTime);
                 if (_acitveTweens[i].tweenBuildFinished)
                 {
