@@ -6,9 +6,6 @@ using UnityEngine.PlayerLoop;
 
 public abstract class AttackBase : MonoBehaviour
 {
-    protected Enemy _target;
-    protected Enemy[] _targets;
-    
     public float damage;
     public float attackSpeed;
     public float attackCooldown;
@@ -17,15 +14,8 @@ public abstract class AttackBase : MonoBehaviour
     
     public abstract void Use();
 
-    protected virtual void OverrideUpdate()
+    public void Update()
     {
-        
-    }
-    
-    private void Update()
-    {
-        OverrideUpdate();
-        
         if (!used) return;
         
         _cooldownTime += Time.deltaTime;
