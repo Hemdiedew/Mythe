@@ -9,7 +9,7 @@ public class PlayerSwitcher : MonoBehaviour
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     private int _currentPlayer = 0;
     [SerializeField] private CinemachineVirtualCamera cinemachineCamera;
-
+    
     private void Start()
     {
         //disable all players an enable current player.

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,11 +19,12 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Gravity")]
     [SerializeField] private float gravity = 20f;
+    [SerializeField] private Transform groundedChecker;
     
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 8f;
-    [SerializeField] private int maxDoubleJumps = 2;
-    private int jumps;
+    [SerializeField] private int jumps = 2;
+    [SerializeField]private int jumpCount;
 
     [Header("Connections")]
     [SerializeField] private CharacterController controller;
@@ -31,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
     //background variables
     private float _moveHor;
     private float _moveVer;
+    private bool isGrounded;
+
+    private void Start()
+    {
+        if (groundedChecker == null) groundedChecker = this.gameObject.transform;
+    }
 
     private void Update()
     {
@@ -39,38 +47,41 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         if (_canMove == false) return;
-        if(!_isSprinting) _isSprinting = Input.GetKeyDown(KeyCode.LeftControl);
+        if (!_isSprinting) _isSprinting = Input.GetKeyDown(KeyCode.LeftControl);
+        if (isGrounded) moveDirection.y = 0;
+        moveDirection = new Vector3((_moveHor / 2) * (_canSprint ? (_isSprinting ? sprintAmplifier : 1) : 1), 
+            moveDirection.y, _moveVer * (_canSprint ? (_isSprinting ? sprintAmplifier : 1) : 1));
         
-        if (controller.isGrounded)
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection.x *= speed;
+        moveDirection.z *= speed;
+        
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < jumps)
         {
-            moveDirection = new Vector3((_moveHor / 2) * (_isSprinting ?  sprintAmplifier : 1), 0, _moveVer * (_isSprinting ? sprintAmplifier : 1));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
-            if (Input.GetKey(KeyCode.Space))
-            {
-                moveDirection.y = jumpSpeed;
-            }
-            jumps = 0;
-        } 
-        else
-        {
-            moveDirection = new Vector3((_moveHor / 2) * (_isSprinting ? sprintAmplifier : 1), moveDirection.y, _moveVer * (_isSprinting ? sprintAmplifier : 1));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection.x *= speed;
-            moveDirection.z *= speed;
-            if (Input.GetKeyDown(KeyCode.Space) && jumps < maxDoubleJumps)
-            {
-                moveDirection.y = jumpSpeed;
-                jumps++;
-            }
+            moveDirection.y = jumpSpeed;
+            isGrounded = false;
+            jumpCount++;
         }
         
+        //custom is grounded check for when you move off a cliff.
+        RaycastHit hit;
+        Debug.DrawRay(groundedChecker.position, -groundedChecker.up * .1f, Color.yellow);
+        bool ray = Physics.Raycast(groundedChecker.position, -groundedChecker.up, out hit, .1f);
+        if (!ray)
+        {
+            //we dont hit anything
+            isGrounded = false;
+        }
+
         if (_moveVer == 0 && _moveHor == 0) _isSprinting = false;
-        moveDirection.y -= gravity * Time.deltaTime;
+        if(!isGrounded) moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+
+        if (!isGrounded) isGrounded = controller.isGrounded; //when we arent grounded check if we are.
+        if (isGrounded) jumpCount = 0;
     }
 
 
