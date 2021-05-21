@@ -36,6 +36,7 @@ public class WindSlash : AttackBase
          GameObject obj = Instantiate(objectToShoot);
          Transform trans = shootLocations[i].transform;
          obj.transform.position = trans.position;
+         
          ThrowObject throwObjectComponent = obj.AddComponent<ThrowObject>();
          throwObjectComponent.Instantiate(damage, true, null);
 
