@@ -26,15 +26,31 @@ public class EnemyStats : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Hurt(5);
+        }
+        
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+
+
     void Attack()
     {
         //Deals Damage to player based on "damage"
     }
 
-    void Hurt()
+    void Hurt(int playerDamage)
     {
         //Lowers hp by Player Attacks damage
         //Play Hurt Animation
+        currentHealth -= playerDamage;
 
         healthbar.SetHealth(currentHealth);
     }
