@@ -74,4 +74,9 @@ public class PlayerSwitcher : MonoBehaviour
         _currentPlayer = newPlayer;
         switched = true;
     }
+
+    public GameObject GetCurrentPlayer()
+    {
+        return players[_currentPlayer].gameObject;
+    }
 }
