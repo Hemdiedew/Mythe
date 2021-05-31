@@ -31,6 +31,7 @@ public class EnemyStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Hurt(5);
+            Debug.Log("attack");
         }
         
         if(currentHealth <= 0)
