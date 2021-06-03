@@ -6,11 +6,6 @@ public class Slash : AttackBase
 {
     [SerializeField] protected RangeChecker _rangeChecker;
 
-    public Slash(EnemyInRangeChecker checker)
-    {
-        _rangeChecker = checker;
-    }
-
     public override void Use()
     {
         //making sure there are enemies to hit.
@@ -22,6 +17,6 @@ public class Slash : AttackBase
             enemy.GetComponent<Health>().RemoveHealth(Random.Range(minDamage, maxDamage));
         }
 
-        // this.used = true;
+        this.used = true;
     }
 }

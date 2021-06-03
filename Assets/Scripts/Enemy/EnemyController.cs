@@ -6,53 +6,73 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
 
-    public float lookRadius = 10f;
-    float attackRadius = 2.5f;
-    float attackCooldown = 0f;
-    public float attackSpeed = 1f;
+    [SerializeField] private float lookRadius = 10f;
+    [SerializeField] private float attackRadius = 2.5f;
+    private float _attackCooldown = 0f;
+    [SerializeField] private float attackSpeed = 1f;
 
-    public GameObject swordSlash;
+    [SerializeField] private GameObject swordSlash;
 
-    Transform target;
-    NavMeshAgent agent;
+    private Transform _target;
+    [SerializeField] private PlayerSwitcher playerSwitcher;
+    [SerializeField] private NavMeshAgent agent;
 
 
     void Start()
     {
-        target = PlayerManager.instance.player.transform;
+        // target = PlayerManager.Instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         swordSlash.SetActive(false);
+        if (playerSwitcher == null) GameObject.FindObjectOfType<PlayerSwitcher>();
+        print(playerSwitcher);
+    }
+
+    private void FixCharacterFollow()
+    {
+        if (playerSwitcher == null) return;
+        print("OMFG");
+        _target = playerSwitcher.GetCurrentPlayer().transform;
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
+        FixCharacterFollow();
+        
+        float distance = Vector3.Distance(_target.position, transform.position);
+        _attackCooldown -= Time.deltaTime;
 
-        attackCooldown -= Time.deltaTime;
+        Look(distance);
+        Attack(distance);
+    }
 
+    private void Look(float distance)
+    {
         if(distance <= lookRadius)
         {
-            agent.SetDestination(target.position);
+            agent.SetDestination(_target.position);
             
             if(distance <= agent.stoppingDistance)
             {
                 FaceTarget();
             }
         }
+    }
+
+    private void Attack(float distance)
+    {
         if (distance <= attackRadius)
         {
-            if (attackCooldown <= 0)
+            if (_attackCooldown <= 0)
             {
-                StartCoroutine("Slash");
-                attackCooldown = 1f / attackSpeed;
+                StartCoroutine(Slash());
+                _attackCooldown = 1f / attackSpeed;
             }
         }
-
     }
 
     void FaceTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+        Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }

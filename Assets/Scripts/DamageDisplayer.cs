@@ -21,7 +21,7 @@ public class DamageDisplayer : MonoBehaviour
         if (lookCamera == null) lookCamera = Camera.main;
     }
 
-    private void TakeDamage(float value)
+    private void TakeDamage(int value)
     {
         if (value < 0) return;
         GameObject go = Instantiate(floatingTextObject, transform.position, Quaternion.identity, canvas.transform);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ThrowObject : MonoBehaviour
 {
-    private float _damage;
+    private int _damage;
     private bool _destroyOnHit;
     private ParticleSystem _particleSystem;
     [SerializeField] private LayerMask layer = 8;
@@ -39,7 +39,7 @@ public class ThrowObject : MonoBehaviour
 
     public void Instantiate(float damage, bool destroyOnHit, ParticleSystem particleOnHit)
     {
-        this._damage = damage / 2;
+        this._damage = (int)(damage / 2);
         this._destroyOnHit = destroyOnHit;
         this._particleSystem = particleOnHit;
     }
