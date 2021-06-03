@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader huisje
+  m_Name: Outline global
   m_Shader: {fileID: -6465566751694194690, guid: 8040c39800a49204492c50fdd9df5624,
     type: 3}
   m_ShaderKeywords: 
@@ -21,5 +21,5 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Thickness_line_: 1.43
+    - Thickness_line_: 0.17
     m_Colors: []
