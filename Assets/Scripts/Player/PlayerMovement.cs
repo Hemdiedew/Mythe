@@ -7,6 +7,8 @@ using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Vector3 lastLandPosition = Vector3.zero;
+    
     [Header("Movement")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private Vector3 moveDirection = Vector3.zero;
@@ -72,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
         bool ray = Physics.Raycast(groundedChecker.position, -groundedChecker.up, out hit, .1f);
         if (!ray)
         {
-            //we dont hit anything
             isGrounded = false;
         }
 
@@ -82,7 +83,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isGrounded) isGrounded = controller.isGrounded; //when we arent grounded check if we are.
         if (isGrounded) jumpCount = 0;
+
+        if (ray)
+        {
+            if (hit.transform.gameObject.layer == (int) Layer.Water)
+            {
+                controller.enabled = false;
+                gameObject.transform.position = lastLandPosition;
+                controller.enabled = true;
+            }
+            
+            if (hit.transform.gameObject.layer == (int) Layer.Land)
+            {
+                // lastLandPosition = transform.position;
+                lastLandPosition = transform.position;
+            }
+        }
     }
-
-
 }
