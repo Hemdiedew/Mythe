@@ -12,6 +12,8 @@ public abstract class AttackBase : MonoBehaviour
     public float attackCooldown;
     private float _cooldownTime;
     public bool used;
+
+    public int attackButtonClickCount = 0;
     
     public abstract void Use();
 
@@ -28,4 +30,6 @@ public abstract class AttackBase : MonoBehaviour
             used = false;
         }
     }
+    
+    
 }
