@@ -14,22 +14,22 @@ public class Slash : AttackBase
     [SerializeField] private Animator animator;
     
     //combo system
-    private static readonly int Animation = Animator.StringToHash("animation");
-    private readonly string[] _animatorNames = new[] {"attack1", "attack2", "attack3"};
-    public bool canClick;
+    private static readonly int Animation = Animator.StringToHash("Animation");
+    private readonly string[] _animatorNames = {"attack1", "attack2", "attack3"};
+    public bool canClick = true;
 
     public override void Use()
     {
         if (!canClick) return;
         comboCount++;
-        
+        print(comboCount);
         if (comboCount == 1)
         {
             animator.SetInteger(Animation, 1);
         }
     }
 
-    public void ComboCheck()
+    public override void ComboCheck()
     {
         canClick = false;
 
@@ -53,36 +53,6 @@ public class Slash : AttackBase
             comboCount = 0;
             canClick = true;
         }
-
-        // if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") && comboCount == 1)
-        // {
-        //     //if the first animation is still playing and only 1 click has happened, return to idle
-        //     animator.SetInteger(Animation, 0);
-        //     comboCount = 0;
-        //     canClick = true;
-        // }
-        // else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1") && comboCount >= 2)
-        // {
-        //     //if the first animation is still playing and at least 2 clicks happened, continue to combo
-        //     animator.SetInteger(Animation, 2);
-        //     comboCount = 0;
-        //     canClick = true;
-        // }
-        //
-        // else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2") && comboCount == 2)
-        // {
-        //     //if the first animation is still playing and at least 3 clicks happened, continue to combo
-        //     animator.SetInteger(Animation, 0);
-        //     comboCount = 0;
-        //     canClick = true;
-        // }
-        // else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3") && comboCount >= 2)
-        // {
-        //     //since this is the third and last animation return to idle
-        //     animator.SetInteger(Animation, 0);
-        //     comboCount = 0;
-        //     canClick = true;
-        // }
     }
 
 }

@@ -11,11 +11,12 @@ public abstract class AttackBase : MonoBehaviour
     public float attackSpeed;
     public float attackCooldown;
     private float _cooldownTime;
-    public bool used;
+    public bool used = false;
 
     public int attackButtonClickCount = 0;
     
     public abstract void Use();
+    public virtual void ComboCheck(){}
 
     public void Update()
     {

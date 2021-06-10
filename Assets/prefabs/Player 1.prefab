@@ -49,7 +49,11 @@ MonoBehaviour:
   attackSpeed: 0
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   _rangeChecker: {fileID: 6352899611118519822}
+  maxComboCount: 3
+  animator: {fileID: 0}
+  canClick: 1
 --- !u!114 &6352899611118519822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6352899611353457812
 Transform:
   m_ObjectHideFlags: 0
@@ -926,6 +930,7 @@ MonoBehaviour:
   attackSpeed: 0
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   objectToShoot: {fileID: 3384110483602561786, guid: 3a881bcceb563de47a2680d29ce4c9b5,
     type: 3}
   speed: 10
@@ -1217,6 +1222,7 @@ MonoBehaviour:
   attackSpeed: 5
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   throwObject: {fileID: 3384110483602561786, guid: 3a881bcceb563de47a2680d29ce4c9b5,
     type: 3}
   throwFromLocation: {fileID: 0}

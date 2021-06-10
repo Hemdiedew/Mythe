@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c063a339054c54144bc18f8c0f5bf9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  minDamage: 0
+  maxDamage: 0
   attackSpeed: 5
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   throwObject: {fileID: 3384110483602561786, guid: 3a881bcceb563de47a2680d29ce4c9b5,
     type: 3}
   throwFromLocation: {fileID: 0}
@@ -614,7 +616,11 @@ MonoBehaviour:
   - {fileID: 2734705562398093105}
   - {fileID: 2734705562305556125}
   - {fileID: 2734705561649449937}
+  playerParticle: []
   cinemachineCamera: {fileID: 0}
+  cooldown: 0
+  currentTime: 0
+  switched: 0
 --- !u!1 &2734705562398093105
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,11 +948,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef3ea89a96c7af4a951ceceb2b4e535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  minDamage: 0
+  maxDamage: 0
   attackSpeed: 0
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   _rangeChecker: {fileID: 2734705562701434289}
+  maxComboCount: 3
+  animator: {fileID: 0}
+  canClick: 1
 --- !u!114 &2734705562701434289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,10 +1053,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e24f3ad7aa083e4dab7a4864dfba856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  minDamage: 0
+  maxDamage: 0
   attackSpeed: 0
   attackCooldown: 0
   used: 0
+  attackButtonClickCount: 0
   objectToShoot: {fileID: 3384110483602561786, guid: 3a881bcceb563de47a2680d29ce4c9b5,
     type: 3}
   speed: 10

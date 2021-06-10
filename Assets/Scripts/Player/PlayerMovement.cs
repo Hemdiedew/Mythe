@@ -34,10 +34,12 @@ public class PlayerMovement : MonoBehaviour
     private float _moveHor;
     private float _moveVer;
     private bool isGrounded;
+    private static readonly int Animation = Animator.StringToHash("Animation");
 
     private void Start()
     {
         if (groundedChecker == null) groundedChecker = this.gameObject.transform;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -79,9 +81,14 @@ public class PlayerMovement : MonoBehaviour
         if (_moveVer == 0 && _moveHor == 0) _isSprinting = false;
         if(!isGrounded) moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+        
+        if(moveDirection.x != 0 || moveDirection.z != 0) anim.SetInteger(Animation, 5);
+        if(moveDirection.x == 0 && moveDirection.z == 0) anim.SetInteger(Animation, 0);
 
         if (!isGrounded) isGrounded = controller.isGrounded; //when we arent grounded check if we are.
         if (isGrounded) jumpCount = 0;
+        
+        print(isGrounded);
     }
 
 

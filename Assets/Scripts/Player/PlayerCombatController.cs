@@ -24,6 +24,11 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
+    public void CheckCombo()
+    {
+        currentAttack.ComboCheck();
+    }
+
 
     
     
