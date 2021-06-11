@@ -14,15 +14,16 @@ public class Slash : AttackBase
     [SerializeField] private Animator animator;
     
     //combo system
-    private static readonly int Animation = Animator.StringToHash("Animation");
+    private static readonly int Animation = Animator.StringToHash("Attack");
     private readonly string[] _animatorNames = {"attack1", "attack2", "attack3"};
     public bool canClick = true;
 
     public override void Use()
     {
+        //fixing that animation has a small delay. an it goes to 2 before playing the animation. 
+        if (comboCount == 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("idle")) return;
         if (!canClick) return;
         comboCount++;
-        print(comboCount);
         if (comboCount == 1)
         {
             animator.SetInteger(Animation, 1);
@@ -36,23 +37,32 @@ public class Slash : AttackBase
         for (int i = 0; i < _animatorNames.Length; i++)
         {
             //zo lang we nog niet voorbij de max count zijn kunnen we nog checken voor nog een combo en anders terug naar idle.
-            if (i < maxComboCount)
+            if (i >= _animatorNames.Length - 1)
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName(_animatorNames[i]) && comboCount > (i + 1))
-                {
-                    //COMBO
-                    animator.SetInteger(Animation, i + 2); //making sure we do the next move count: 2,3,4,5,6 etc.. move 1 is the first move before this is called
-                    canClick = true;
-                    return;
-                }
+              Idle();
+              return;
             }
-
-            //IDLE
-            idle:
-            animator.SetInteger(Animation, 0);
-            comboCount = 0;
-            canClick = true;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(_animatorNames[i]) && comboCount > (i + 1))
+            {
+                //COMBO
+                NextAttack(i);
+                return;
+            }
         }
+        Idle();
+    }
+
+    private void Idle()
+    {
+        animator.SetInteger(Animation, 0);
+        comboCount = 0;
+        canClick = true;
+    }
+
+    private void NextAttack(int i)
+    {
+        animator.SetInteger(Animation, i + 2); //making sure we do the next move count: 2,3,4,5,6 etc.. move 1 is the first move before this is called
+        canClick = true;
     }
 
 }
