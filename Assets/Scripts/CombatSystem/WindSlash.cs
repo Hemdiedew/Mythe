@@ -19,9 +19,13 @@ public class WindSlash : AttackBase
 
     private void Start()
     {
-        if (shootLocations.Count <= 0 || objectToShoot == null)
+        if (objectToShoot == null)
         {
-            Debug.LogWarning(this.gameObject + " Has no object to shoot and / or places to shoot from");
+            Debug.LogError(this.gameObject + "No object to shoot");
+        }
+        if (shootLocations.Count <= 0)
+        {
+            Debug.LogWarning(this.gameObject + "No placed to shoot from");
         }
     }
 

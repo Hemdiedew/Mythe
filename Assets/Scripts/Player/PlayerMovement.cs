@@ -44,9 +44,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //get input
         _moveHor = Input.GetAxis("Horizontal");
         _moveVer = Input.GetAxis("Vertical"); 
+        
+        //check if we want to move
         Move();
+        
+        //check if we want to jump
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < jumps)
+        {
+            Jump();
+        }
+        
+        //check if we are grounded 
+        IsGroundedCheck();
+        
+        //are we grounded? if yes reset jump
+        CheckJumpReset();
+        
+        //apply gravity and move to new position
+        if (_moveVer == 0 && _moveHor == 0) _isSprinting = false;
+        if(!isGrounded) moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(moveDirection * Time.deltaTime);
+
+        //animate it!
+        Animate();
     }
 
     private void Move()
@@ -60,14 +83,17 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection.x *= speed;
         moveDirection.z *= speed;
-        
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < jumps)
-        {
-            moveDirection.y = jumpSpeed;
-            isGrounded = false;
-            jumpCount++;
-        }
-        
+    }
+
+    private void Jump()
+    {
+        moveDirection.y = jumpSpeed;
+        isGrounded = false;
+        jumpCount++;
+    }
+
+    private void IsGroundedCheck()
+    {
         //custom is grounded check for when you move off a cliff.
         RaycastHit hit;
         Debug.DrawRay(groundedChecker.position, -groundedChecker.up * .1f, Color.yellow);
@@ -77,17 +103,21 @@ public class PlayerMovement : MonoBehaviour
             //we dont hit anything
             isGrounded = false;
         }
+    }
 
-        if (_moveVer == 0 && _moveHor == 0) _isSprinting = false;
-        if(!isGrounded) moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
-        
-        if(moveDirection.x != 0 || moveDirection.z != 0) anim.SetInteger(Animation, 1);
-        if(moveDirection.x == 0 && moveDirection.z == 0) anim.SetInteger(Animation, 0);
+    private void Animate()
+    {
+        if (anim != null)
+        {
+            if (moveDirection.x != 0 || moveDirection.z != 0) anim.SetInteger(Animation, 1);
+            if (moveDirection.x == 0 && moveDirection.z == 0) anim.SetInteger(Animation, 0);
+        }
+    }
 
+    private void CheckJumpReset()
+    {
         if (!isGrounded) isGrounded = controller.isGrounded; //when we arent grounded check if we are.
         if (isGrounded) jumpCount = 0;
     }
-
 
 }

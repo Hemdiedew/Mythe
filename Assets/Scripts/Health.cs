@@ -28,25 +28,22 @@ public class Health : MonoBehaviour
     public void RemoveHealth(int value)
     {
         value = (int) value;
-        RemoveHealthEvent?.Invoke(value);
-
         int newHealth = health - value;
         if (newHealth <= 0) newHealth = 0;
         health = newHealth;
-        
         if(health <= 0) { dieEvent.Invoke(); }
-
         Debug.Log("new hp: " + health);
+        RemoveHealthEvent?.Invoke(value);
     }
 
     public void AddHealth(int value)
     {
         value = (int) value;
-        AddHealthEvent.Invoke(value);
         
         int newHealth = health + value;
         if (newHealth >= maxHealth) newHealth = maxHealth;
         health = newHealth;
+        AddHealthEvent.Invoke(value);
     }
 
     public void DestroyThisObject()

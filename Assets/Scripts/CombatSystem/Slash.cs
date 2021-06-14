@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -8,6 +9,7 @@ using UnityEngine.Serialization;
 
 public class Slash : AttackBase
 {
+    [SerializeField] private DamageOnCollision wapen;
     [SerializeField] protected RangeChecker _rangeChecker;
     private int comboCount = 0;
     [SerializeField] private int maxComboCount = 3;
@@ -18,6 +20,17 @@ public class Slash : AttackBase
     private readonly string[] _animatorNames = {"attack1", "attack2", "attack3"};
     public bool canClick = true;
 
+    private void Start()
+    {
+        if (wapen == null)
+        {
+            Debug.LogError("No DamageOnCollision class found!");
+            return;
+        }
+        wapen.SetDamageValues(minDamage, maxDamage);
+        wapen.IsActive = false;
+    }
+
     public override void Use()
     {
         //fixing that animation has a small delay. an it goes to 2 before playing the animation. 
@@ -26,6 +39,7 @@ public class Slash : AttackBase
         comboCount++;
         if (comboCount == 1)
         {
+            wapen.IsActive = true;
             animator.SetInteger(Animation, 1);
         }
     }
@@ -57,10 +71,12 @@ public class Slash : AttackBase
         animator.SetInteger(Animation, 0);
         comboCount = 0;
         canClick = true;
+        wapen.IsActive = false;
     }
 
     private void NextAttack(int i)
     {
+        wapen.IsActive = true;
         animator.SetInteger(Animation, i + 2); //making sure we do the next move count: 2,3,4,5,6 etc.. move 1 is the first move before this is called
         canClick = true;
     }
