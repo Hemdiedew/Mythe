@@ -23,14 +23,13 @@ public class EnemyController : MonoBehaviour
         // target = PlayerManager.Instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         swordSlash.SetActive(false);
-        if (playerSwitcher == null) GameObject.FindObjectOfType<PlayerSwitcher>();
+        if (playerSwitcher == null) FindObjectOfType<PlayerSwitcher>();
         print(playerSwitcher);
     }
 
     private void FixCharacterFollow()
     {
         if (playerSwitcher == null) return;
-        print("OMFG");
         _target = playerSwitcher.GetCurrentPlayer().transform;
     }
 
