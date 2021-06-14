@@ -60,6 +60,10 @@ public class PlayerSwitcher : MonoBehaviour
         //fixing player rotation
         players[newPlayer].gameObject.transform.rotation = players[_currentPlayer].gameObject.transform.rotation;
         
+        //fixing last land position
+        players[newPlayer].gameObject.GetComponent<PlayerMovement>().lastLandPosition =
+            players[_currentPlayer].gameObject.GetComponent<PlayerMovement>().lastLandPosition;
+        
         //disable old player enable new player
         players[_currentPlayer].gameObject.SetActive(false);
         players[newPlayer].gameObject.SetActive(true);
