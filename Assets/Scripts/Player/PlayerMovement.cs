@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private float _moveVer;
     private bool isGrounded;
     private static readonly int Animation = Animator.StringToHash("Movement");
+    public Vector3 lastLandPosition = Vector3.zero;
 
     private void Start()
     {
@@ -102,6 +103,29 @@ public class PlayerMovement : MonoBehaviour
         {
             //we dont hit anything
             isGrounded = false;
+        }
+
+        //fixes that we dont go truw water
+        OnWaterCollision(ray, hit);
+    }
+
+    private void OnWaterCollision(bool ray, RaycastHit hit)
+    {
+        if (ray)
+        {
+            print(hit.transform.gameObject.name);
+            if (hit.transform.gameObject.layer == (int) Layer.Water)
+            {
+                controller.enabled = false;
+                gameObject.transform.position = lastLandPosition;
+                controller.enabled = true;
+            }
+            
+            if (hit.transform.gameObject.layer == (int) Layer.Land)
+            {
+                // lastLandPosition = transform.position;
+                lastLandPosition = transform.position;
+            }
         }
     }
 
