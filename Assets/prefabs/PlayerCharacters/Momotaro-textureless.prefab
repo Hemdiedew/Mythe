@@ -202,6 +202,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 5561349426305759274, guid: 39377c116a0527f4f8988ca2eb2fe1fd, type: 3}
+  - {fileID: 2100000, guid: 876aa126dcee38c4e88f51d3f9cca3a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -815,6 +816,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 5561349426305759274, guid: 39377c116a0527f4f8988ca2eb2fe1fd, type: 3}
+  - {fileID: 2100000, guid: 876aa126dcee38c4e88f51d3f9cca3a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1306,6 +1308,96 @@ Transform:
   m_Father: {fileID: 8230879207010491754}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5419642344421597580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8090740065056097659}
+  - component: {fileID: 216529458727412680}
+  m_Layer: 9
+  m_Name: Pony_tail (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8090740065056097659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419642344421597580}
+  m_LocalRotation: {x: 0.9705843, y: 0, z: 0, w: -0.24076167}
+  m_LocalPosition: {x: -0, y: 0.16367966, z: -0.00084705825}
+  m_LocalScale: {x: 0.046645276, y: 0.046645276, z: 0.046645276}
+  m_Children: []
+  m_Father: {fileID: 8893023605472876553}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &216529458727412680
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419642344421597580}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 876aa126dcee38c4e88f51d3f9cca3a6, type: 2}
+  - {fileID: 2100000, guid: 876aa126dcee38c4e88f51d3f9cca3a6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -2796588514703858805, guid: 39377c116a0527f4f8988ca2eb2fe1fd, type: 3}
+  m_Bones:
+  - {fileID: 7059253333233507283}
+  - {fileID: 3605342709040778378}
+  - {fileID: 3010790083609724372}
+  - {fileID: 7000577324291646033}
+  - {fileID: 2201546435601182673}
+  - {fileID: 4773175351154002956}
+  - {fileID: 5338709261280976804}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 7059253333233507283}
+  m_AABB:
+    m_Center: {x: -0.0013627303, y: -0.001284459, z: 0}
+    m_Extent: {x: 0.0025898018, y: 0.0034114923, z: 0.001388992}
+  m_DirtyAABB: 0
 --- !u!1 &5704884909206039147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,6 +1543,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2763933512644464570, guid: 39377c116a0527f4f8988ca2eb2fe1fd, type: 3}
+  - {fileID: 2100000, guid: 876aa126dcee38c4e88f51d3f9cca3a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1761,6 +1854,7 @@ Transform:
   - {fileID: 7059253333233507283}
   - {fileID: 3509015474103194187}
   - {fileID: 8998443461713200264}
+  - {fileID: 8090740065056097659}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2256,6 +2350,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 5561349426305759274, guid: 39377c116a0527f4f8988ca2eb2fe1fd, type: 3}
+  - {fileID: 2100000, guid: 6343182dd5fb4694795ccab8bdcdd48d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
