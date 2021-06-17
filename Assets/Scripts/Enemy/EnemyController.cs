@@ -25,8 +25,8 @@ public class EnemyController : MonoBehaviour
         // target = PlayerManager.Instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         swordSlash.SetActive(false);
-        if (playerSwitcher == null) GameObject.FindObjectOfType<PlayerSwitcher>();
-        print(playerSwitcher);
+        //find the player
+        if (playerSwitcher == null) playerSwitcher = FindObjectOfType<PlayerSwitcher>();
     }
 
     private void FixCharacterFollow()
@@ -68,7 +68,6 @@ public class EnemyController : MonoBehaviour
         {
             if (_attackCooldown <= 0)
             {
-                StartCoroutine(Slash());
                 animator.SetBool("IsAttacking", true);
                 _attackCooldown = 1f / attackSpeed;
             }
@@ -91,13 +90,5 @@ public class EnemyController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
         Gizmos.DrawWireSphere(transform.position, attackRadius);
-    }
-    
-    IEnumerator Slash()
-    {
-        swordSlash.SetActive(true);
-        yield return new WaitForSeconds(0.5f); 
-        swordSlash.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
     }
 }

@@ -114,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ray)
         {
-            print(hit.transform.gameObject.name);
             if (hit.transform.gameObject.layer == (int) Layer.Water)
             {
                 controller.enabled = false;

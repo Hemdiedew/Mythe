@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -10,33 +11,33 @@ using Debug = UnityEngine.Debug;
 public class Healthbar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
-    private Health _health;
+    [SerializeField] private Health health;
 
     private void Start()
     {
-        _health = GetComponent<Health>();
-        if (_health == null)
+        // health = GetComponent<Health>();
+        if (health == null)
         {
             Debug.LogError("No Health script was found!");
             return;
         }
-        SetMaxHealth(_health.maxHealth);
+        SetMaxHealth(health.maxHealth);
         // _health.RemoveHealthEvent.AddListener(SetMaxHealth(_health.health));
-        _health.RemoveHealthEvent.AddListener((int value)=>
+        health.RemoveHealthEvent.AddListener((int value)=>
         {
             //we dont want to get value what equals damage value. but we want the new health.
-            SetHealth(_health.health);
+            SetHealth(health.health);
         });
     }
 
-    private void SetMaxHealth(int health)
+    private void SetMaxHealth(int value)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        slider.maxValue = value;
+        slider.value = value;
     }
 
-    public  void SetHealth(int health)
+    public  void SetHealth(int value)
     {
-        slider.value = health;
+        slider.value = value;
     }
 }
