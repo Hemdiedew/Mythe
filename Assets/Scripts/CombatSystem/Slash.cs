@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using UnityEditor.UI;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class Slash : AttackBase
 {
     [SerializeField] private DamageOnCollision wapen;
-    [SerializeField] protected RangeChecker _rangeChecker;
-    private int comboCount = 0;
-    [SerializeField] private int maxComboCount = 3;
+    private int _comboCount = 0;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource slash;
     
     //combo system
     private static readonly int Animation = Animator.StringToHash("Attack");
@@ -34,10 +26,10 @@ public class Slash : AttackBase
     public override void Use()
     {
         //fixing that animation has a small delay. an it goes to 2 before playing the animation. 
-        if (comboCount == 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("idle")) return;
+        if (_comboCount == 0 && !animator.GetCurrentAnimatorStateInfo(0).IsName("idle")) return;
         if (!canClick) return;
-        comboCount++;
-        if (comboCount == 1)
+        _comboCount++;
+        if (_comboCount == 1)
         {
             wapen.IsActive = true;
             animator.SetInteger(Animation, 1);
@@ -56,7 +48,7 @@ public class Slash : AttackBase
               Idle();
               return;
             }
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName(_animatorNames[i]) && comboCount > (i + 1))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(_animatorNames[i]) && _comboCount > (i + 1))
             {
                 //COMBO
                 NextAttack(i);
@@ -69,7 +61,7 @@ public class Slash : AttackBase
     private void Idle()
     {
         animator.SetInteger(Animation, 0);
-        comboCount = 0;
+        _comboCount = 0;
         canClick = true;
         wapen.IsActive = false;
     }
@@ -81,4 +73,10 @@ public class Slash : AttackBase
         canClick = true;
     }
 
+    //sounds
+    public void PlaySlashSound()
+    {
+        // slashSound.Play();
+        slash.Play();
+    }
 }

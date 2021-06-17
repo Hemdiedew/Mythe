@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Connections")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioSource footstep;
 
     //background variables
     private float _moveHor;
@@ -144,4 +145,8 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded) jumpCount = 0;
     }
 
+    public void PlayFootstepSound()
+    {
+        footstep.Play();
+    }
 }
