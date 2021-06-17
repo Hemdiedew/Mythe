@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using UnityEditorInternal.VersionControl;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Tween
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEngine;
-using UnityEngine.Serialization;
-
+﻿using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]

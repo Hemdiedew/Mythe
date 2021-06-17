@@ -15,7 +15,7 @@ public class Healthbar : MonoBehaviour
 
     private void Start()
     {
-        // health = GetComponent<Health>();
+        health = GetComponent<Health>();
         if (health == null)
         {
             Debug.LogError("No Health script was found!");

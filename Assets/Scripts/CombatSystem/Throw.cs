@@ -1,5 +1,4 @@
-﻿using System;
-using TweenMachine;
+﻿using TweenMachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

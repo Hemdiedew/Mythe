@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using TweenMachine;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
