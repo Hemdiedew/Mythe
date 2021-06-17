@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     //background variables
     private float _moveHor;
     private float _moveVer;
-    private bool isGrounded;
+    public bool isGrounded;
     private static readonly int Animation = Animator.StringToHash("Movement");
     public Vector3 lastLandPosition = Vector3.zero;
 

@@ -4,15 +4,18 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-public class WindSlash : AttackBase
+public class Tornado : AttackBase
 {
     [SerializeField] private GameObject objectToShoot;
     [SerializeField] private float speed;
     [SerializeField] private List<Transform> shootLocations;
     [SerializeField] private float maxDistance;
+    private static readonly int Animation = Animator.StringToHash("Attack");
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
+        if (animator == null) animator = GetComponent<Animator>();
         if (objectToShoot == null)
         {
             Debug.LogError(this.gameObject + "No object to shoot");
@@ -28,22 +31,36 @@ public class WindSlash : AttackBase
         if (objectToShoot == null) return;
         if (shootLocations.Count <= 0) return;
         
-        //logic
+        if (animator != null) animator.SetInteger(Animation, 2);
+    }
+
+    public void SpawnAttack()
+    {
         for (int i = 0; i < shootLocations.Count; i++)
         {
-         //for all the locations we want to instantiate a slash. 
-         GameObject obj = Instantiate(objectToShoot);
-         Transform trans = shootLocations[i].transform;
-         obj.transform.position = trans.position;
+            //for all the locations we want to instantiate a slash. 
+            GameObject obj = Instantiate(objectToShoot);
+            Transform trans = shootLocations[i].transform;
+            obj.transform.position = trans.position;
          
-         ThrowObject throwObjectComponent = obj.AddComponent<ThrowObject>();
-         throwObjectComponent.Instantiate(Random.Range(minDamage, maxDamage), true, null);
+            ThrowObject throwObjectComponent = obj.AddComponent<ThrowObject>();
+            throwObjectComponent.Instantiate(Random.Range(minDamage, maxDamage), true, null);
 
-         TweenBuild tweenBuild = new TweenBuild(obj);
-         Tween tweenPosition = tweenBuild.SetTweenPosition(shootLocations[i].position + (shootLocations[i].forward * maxDistance), .4f, EasingType.Linear);
+            TweenBuild tweenBuild = new TweenBuild(obj);
+            Tween tweenPosition = tweenBuild.SetTweenPosition(shootLocations[i].position + (shootLocations[i].forward * maxDistance), speed, EasingType.Linear);
         
-         tweenBuild.DestroyOnFinish = true;
-         tweenBuild.StartTween();
+            tweenBuild.DestroyOnFinish = true;
+            tweenBuild.StartTween();
+        }
+    }
+
+    public void StopAttackAnimation()
+    {
+        print("STOP!!!!!");
+        if (animator != null)
+        {
+            print("WORKED");
+            animator.SetInteger(Animation, 0);
         }
     }
 

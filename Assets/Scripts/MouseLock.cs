@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLock : MonoBehaviour
 {
-    bool paused = false;
+    public bool paused = false;
 
 
     // Update is called once per frame
@@ -14,6 +14,11 @@ public class MouseLock : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
